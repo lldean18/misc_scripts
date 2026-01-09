@@ -3,6 +3,8 @@
 # code was run from the terminal on my Mac (except for the conversion to flatfile)
 # code used to submit a genome assembly with annotation to ENA
 
+
+################################################
 # before any submission, need to convert the fasta asm and gff annotation to EMBL flat file format for submission
 # ON ADA
 #conda create --name embl -c bioconda emblmygff3
@@ -17,8 +19,11 @@ EMBLmyGFF3 maker.gff3 ragtag.scaffolds_only.fasta \
         --locus_tag LOCUSTAG \
         --project_id PRJXXXXXXX \
         -o result.embl
+conda deactivate
 
 
+################################################
+# ON MY MAC
 # Genome assemblies can only be submitted using the webin-cli
 # downloaded webincli from github
 mkdir -p ~/software/webin-cli
@@ -31,11 +36,10 @@ wget https://github.com/enasequence/webin-cli/releases/download/9.0.1/webin-cli-
 mkdir -p /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
 cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
 
-# copy the assembly and the annotation files to the submission dir from the HPC
-scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/annotation_summary.tsv ./
-scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/
-
-
+## copy the assembly and the annotation files to the submission dir from the HPC
+#scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/annotation_summary.tsv ./
+#scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/
+scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result.embl ./
 
 
 # after that from the command line:
