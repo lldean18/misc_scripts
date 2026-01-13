@@ -7,20 +7,27 @@
 ################################################
 # before any submission, need to convert the fasta asm and gff annotation to EMBL flat file format for submission
 # ON ADA
+conda activate tmux
+tmux new -t ENA
+srun --partition defq --cpus-per-task 1 --mem 20g --time 2:00:00 --pty bash
 #conda create --name embl -c bioconda emblmygff3
 conda activate embl
 cd /gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag
+# remove the locus tag since EMBLmyGFF3 seems to add it
+sed 's/locus_tag=PTIG_/locus_tag=/g' ptigris_annotation_formatted.gff > ptigris_annotation_formatted_noloctag.gff
+
 # convert the assembly and annotation to flatfile format
-EMBLmyGFF3 maker.gff3 ragtag.scaffolds_only.fasta \
+EMBLmyGFF3 ptigris_annotation_formatted_noloctag.gff ragtag.scaffolds_only.fasta \
         --topology linear \
         --molecule_type 'genomic DNA' \
         --transl_table 1  \
-        --species 'Drosophila melanogaster' \
-        --locus_tag LOCUSTAG \
-        --project_id PRJXXXXXXX \
-        -o result.embl
+        --species 'Panthera tigris' \
+        --locus_tag PTIG \
+        --project_id PRJEB74210 \
+        -o result2.embl
 conda deactivate
 
+gzip -k result2.embl
 
 ################################################
 # ON MY MAC
@@ -39,13 +46,17 @@ cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/Bioi
 ## copy the assembly and the annotation files to the submission dir from the HPC
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/annotation_summary.tsv ./
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/
-scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result.embl ./
+scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result2.embl.gz ./
+
+# the files must be zipped for submission
+gzip chromosome_list.txt
+gzip result.embl
 
 
 # after that from the command line:
 java -jar /Users/lauradean/software/webin-cli/webin-cli-9.0.1.jar \
-	-username Webin-XXXXX \
-	-password YYYYYYY \
+	-username Webin-154 \
+	-password hjsH3ZTp \
 	-context genome \
 	-manifest manifest.txt \
 	-validate
