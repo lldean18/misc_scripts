@@ -15,19 +15,20 @@ conda activate embl
 cd /gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag
 # remove the locus tag since EMBLmyGFF3 seems to add it
 sed 's/locus_tag=PTIG_/locus_tag=/g' ptigris_annotation_formatted.gff > ptigris_annotation_formatted_noloctag.gff
+# this was wrong go with the locus tag version
 
 # convert the assembly and annotation to flatfile format
-EMBLmyGFF3 ptigris_annotation_formatted_noloctag.gff ragtag.scaffolds_only.fasta \
+EMBLmyGFF3 ptigris_annotation_formatted.gff ragtag.scaffolds_only.fasta \
         --topology linear \
         --molecule_type 'genomic DNA' \
         --transl_table 1  \
         --species 'Panthera tigris' \
         --locus_tag PTIG \
         --project_id PRJEB74210 \
-        -o result2.embl
+        -o result3.embl
 conda deactivate
 
-gzip -k result2.embl
+gzip -k result3.embl
 
 ################################################
 # ON MY MAC
