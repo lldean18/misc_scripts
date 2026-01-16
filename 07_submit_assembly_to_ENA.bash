@@ -55,6 +55,11 @@ scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_
 gzip chromosome_list.txt
 gzip result.embl
 
+# identify all the incorrectly added extra locus tag lines that need to be removed
+sed 's/.* line: //g;s/ of result4.embl.gz]//g' /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission/genome/SumTig1.0/validate/result4.embl.gz.report > /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission/incorrect_lines.txt
+
+
+
 
 # after that from the command line:
 java -jar /Users/lauradean/software/webin-cli/webin-cli-9.0.1.jar \
