@@ -9,7 +9,7 @@
 # ON ADA
 conda activate tmux
 tmux new -t ENA
-srun --partition defq --cpus-per-task 1 --mem 20g --time 2:00:00 --pty bash
+srun --partition defq --cpus-per-task 1 --mem 20g --time 6:00:00 --pty bash
 #conda create --name embl -c bioconda emblmygff3
 conda activate embl
 cd /gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag
@@ -18,17 +18,17 @@ sed 's/locus_tag=PTIG_/locus_tag=/g' ptigris_annotation_formatted.gff > ptigris_
 # this was wrong go with the locus tag version
 
 # convert the assembly and annotation to flatfile format
-EMBLmyGFF3 ptigris_annotation_formatted.gff ragtag.scaffolds_only.fasta \
+EMBLmyGFF3 ptigris_annotation_formatted_noloctag.gff ragtag.scaffolds_only.fasta \
         --topology linear \
         --molecule_type 'genomic DNA' \
         --transl_table 1  \
         --species 'Panthera tigris' \
         --locus_tag PTIG \
         --project_id PRJEB74210 \
-        -o result3.embl
+        -o result4.embl
 conda deactivate
 
-gzip -k result3.embl
+gzip -k result4.embl
 
 ################################################
 # ON MY MAC
