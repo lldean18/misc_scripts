@@ -1,5 +1,7 @@
+#!/bin/bash
 # Laura Dean
 # 19th december 25
+# 13th Feb 26 (stupid thing!)
 # code was run from the terminal on my Mac (except for the conversion to flatfile)
 # code used to submit a genome assembly with annotation to ENA
 
@@ -13,22 +15,21 @@ srun --partition defq --cpus-per-task 1 --mem 20g --time 6:00:00 --pty bash
 #conda create --name embl -c bioconda emblmygff3
 conda activate embl
 cd /gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag
-# remove the locus tag since EMBLmyGFF3 seems to add it
-sed 's/locus_tag=PTIG_/locus_tag=/g' ptigris_annotation_formatted.gff > ptigris_annotation_formatted_noloctag.gff
-# this was wrong go with the locus tag version
+##  # remove the locus tag since EMBLmyGFF3 seems to add it
+##  sed 's/locus_tag=PTIG_/locus_tag=/g' ptigris_annotation_formatted.gff > ptigris_annotation_formatted_noloctag.gff
+##  # this was wrong go with the locus tag version
 
 # convert the assembly and annotation to flatfile format
-EMBLmyGFF3 ptigris_annotation_formatted_noloctag.gff ragtag.scaffolds_only.fasta \
+EMBLmyGFF3 ptigris_annotation_formatted.gff ragtag.scaffolds_only.fasta \
         --topology linear \
         --molecule_type 'genomic DNA' \
         --transl_table 1  \
         --species 'Panthera tigris' \
-        --locus_tag PTIG \
         --project_id PRJEB74210 \
-        -o result4.embl
-conda deactivate
+        -o result5.embl
 
-gzip -k result4.embl
+#        --locus_tag PTIG \
+gzip -k result5.embl
 
 ################################################
 # ON MY MAC
@@ -49,20 +50,21 @@ cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/Bioi
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result2.embl.gz ./
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result3.embl.gz ./
-scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result4.embl.gz ./
+#scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result4.embl.gz ./
+scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result5.embl.gz ./
 
 # the files must be zipped for submission
 gzip chromosome_list.txt
 gzip result.embl
 
-# identify all the incorrectly added extra locus tag lines that need to be removed
-cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
-grep "ERROR: Illegal /locus_tag value" genome/SumTig1.0/validate/result4.embl.gz.report > tmp
-
-sed 's/.* line: //g;s/ of result4.embl.gz]//g' tmp > incorrect_lines.txt
-
-# remove them from the flatfile
-gunzip -c  result4.embl.gz | awk 'NR==FNR {bad[$1]; next} !(NR in bad)' incorrect_lines.txt - | gzip > result4.filtered.embl.gz
+##  # identify all the incorrectly added extra locus tag lines that need to be removed
+##  cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
+##  grep "ERROR: Illegal /locus_tag value" genome/SumTig1.0/validate/result4.embl.gz.report > tmp
+##  
+##  sed 's/.* line: //g;s/ of result4.embl.gz]//g' tmp > incorrect_lines.txt
+##  
+##  # remove them from the flatfile
+##  gunzip -c  result4.embl.gz | awk 'NR==FNR {bad[$1]; next} !(NR in bad)' incorrect_lines.txt - | gzip > result4.filtered.embl.gz
 
 
 
