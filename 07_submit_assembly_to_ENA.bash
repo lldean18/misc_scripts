@@ -15,21 +15,19 @@ srun --partition defq --cpus-per-task 1 --mem 20g --time 6:00:00 --pty bash
 #conda create --name embl -c bioconda emblmygff3
 conda activate embl
 cd /gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag
-##  # remove the locus tag since EMBLmyGFF3 seems to add it
-##  sed 's/locus_tag=PTIG_/locus_tag=/g' ptigris_annotation_formatted.gff > ptigris_annotation_formatted_noloctag.gff
-##  # this was wrong go with the locus tag version
+
 
 # convert the assembly and annotation to flatfile format
-EMBLmyGFF3 ptigris_annotation_formatted.gff ragtag.scaffolds_only.fasta \
+EMBLmyGFF3 annotated.gff3 ragtag.scaffolds_only.fasta \
         --topology linear \
         --molecule_type 'genomic DNA' \
         --transl_table 1  \
         --species 'Panthera tigris' \
+        --locus_tag PTIG \
         --project_id PRJEB74210 \
-        -o result5.embl
+        -o result6.embl
 
-#        --locus_tag PTIG \
-gzip -k result5.embl
+gzip -k result6.embl
 
 ################################################
 # ON MY MAC
@@ -46,26 +44,15 @@ mkdir -p /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingha
 cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
 
 ## copy the assembly and the annotation files to the submission dir from the HPC
-#scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/annotation_summary.tsv ./
-#scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result2.embl.gz ./
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result3.embl.gz ./
 #scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result4.embl.gz ./
-scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result5.embl.gz ./
+#scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result5.embl.gz ./
+scp ada:/gpfs01/home/mbzlld/data/OrgOne/sumatran_tiger/hifiasm_asm9/ONTasm.bp.p_ctg_100kb_ragtag/result6.embl.gz ./
 
 # the files must be zipped for submission
 gzip chromosome_list.txt
 gzip result.embl
-
-##  # identify all the incorrectly added extra locus tag lines that need to be removed
-##  cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
-##  grep "ERROR: Illegal /locus_tag value" genome/SumTig1.0/validate/result4.embl.gz.report > tmp
-##  
-##  sed 's/.* line: //g;s/ of result4.embl.gz]//g' tmp > incorrect_lines.txt
-##  
-##  # remove them from the flatfile
-##  gunzip -c  result4.embl.gz | awk 'NR==FNR {bad[$1]; next} !(NR in bad)' incorrect_lines.txt - | gzip > result4.filtered.embl.gz
-
 
 
 # after that from the command line:
@@ -75,4 +62,13 @@ java -jar /Users/lauradean/software/webin-cli/webin-cli-9.0.1.jar \
 	-context genome \
 	-manifest manifest.txt \
 	-validate
+
+
+# and once it would validate successfully submit using:
+java -jar /Users/lauradean/software/webin-cli/webin-cli-9.0.1.jar \
+        -username Webin-154 \
+        -password hjsH3ZTp \
+        -context genome \
+        -manifest manifest.txt \
+        -submit
 
