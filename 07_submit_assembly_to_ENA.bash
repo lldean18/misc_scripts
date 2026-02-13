@@ -56,8 +56,13 @@ gzip chromosome_list.txt
 gzip result.embl
 
 # identify all the incorrectly added extra locus tag lines that need to be removed
-sed 's/.* line: //g;s/ of result4.embl.gz]//g' /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission/genome/SumTig1.0/validate/result4.embl.gz.report > /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission/incorrect_lines.txt
+cd /Users/lauradean/Library/CloudStorage/OneDrive-TheUniversityofNottingham/BioinfTech/05_DeepSeq/OrgOne/01_sumatran_tiger/ENA_asm_submission
+grep "ERROR: Illegal /locus_tag value" genome/SumTig1.0/validate/result4.embl.gz.report > tmp
 
+sed 's/.* line: //g;s/ of result4.embl.gz]//g' tmp > incorrect_lines.txt
+
+# remove them from the flatfile
+gunzip -c  result4.embl.gz | awk 'NR==FNR {bad[$1]; next} !(NR in bad)' incorrect_lines.txt - | gzip > result4.filtered.embl.gz
 
 
 
