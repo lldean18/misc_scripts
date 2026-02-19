@@ -72,3 +72,7 @@ java -jar /Users/lauradean/software/webin-cli/webin-cli-9.0.1.jar \
         -manifest manifest.txt \
         -submit
 
+# this worked :D
+# temp accession: ERZ29076574
+
+
