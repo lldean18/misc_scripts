@@ -85,7 +85,8 @@ wget --input-file=../ftp_paths.txt
 
 cut -f1-12 -d$'\t' run_info_flt.tsv > metadata_reads.tsv
 
-
+# from my laptop pull the metadata
+scp ada:/share/BioinfMSc/temp/doggies/metadata_reads.tsv ./
 
 
 
