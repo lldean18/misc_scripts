@@ -86,6 +86,24 @@ cut -f1-12 -d$'\t' final_read_info_all.tsv > metadata_reads.tsv
 scp ada:/share/BioinfMSc/temp/doggies/metadata_reads.tsv ./
 
 
+#############
+# move half the download to the shared dir to make space in my home for the rest
+#############
+
+# get the first 138 file names from the file passed to wget
+cd /gpfs01/home/mbzlld/data/dogs
+head -n 138 new_ftp_paths.txt > files_to_move.txt
+sed -i 's|.*/||' files_to_move.txt
+
+# move the files in the list to the shared dir
+cd fastqs
+while IFS= read -r f; do
+  mv -- "$f" /share/BioinfMSc/Hannah_resources/doggies/fastqs/
+done < ../files_to_move.txt
+
+
+
+
 
 
 
