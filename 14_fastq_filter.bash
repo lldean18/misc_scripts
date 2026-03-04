@@ -5,7 +5,7 @@
 
 conda activate tmux
 tmux attach -t dogs
-srun --partition defq --cpus-per-task 2 --mem 20g --time 8:00:00 --pty bash
+srun --partition defq --cpus-per-task 40 --mem 100g --time 4:00:00 --pty bash
 
 source $HOME/.bash_profile
 conda activate seqtk
@@ -28,4 +28,5 @@ fastq_rev=/share/BioinfMSc/Hannah_resources/doggies/fastqs/SRR7120208_2.fastq.gz
 seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_fwd##*/}
 seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_rev##*/}
 
+seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_fwd##*/}
 
