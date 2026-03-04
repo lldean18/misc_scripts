@@ -98,11 +98,16 @@ sed -i 's|.*/||' files_to_move.txt
 # move the files in the list to the shared dir
 cd fastqs
 while IFS= read -r f; do
+#  [ -e "$f" ] && mv -- "$f" /share/BioinfMSc/Hannah_resources/doggies/fastqs/
   mv -- "$f" /share/BioinfMSc/Hannah_resources/doggies/fastqs/
 done < ../files_to_move.txt
+# this moved all the files despite the fact that group ownership was not preserved
 
+# once the download was complete I moved the rest of the fastqs from my home dir to the shared dir
+# and had to change the group ownership again repeating the command below
 
-
+# go to the shared dir and set the group with
+chgrp drs-10665-bioinf_res_proj fastqs/*
 
 
 
