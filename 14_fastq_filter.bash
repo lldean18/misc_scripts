@@ -12,7 +12,7 @@
 #SBATCH --mem=100g
 #SBATCH --time=8:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=1-115
+#SBATCH --array=46-115
 
 ###  # testing on a single individual
 ###  # this used 85GB of memory!!
@@ -63,5 +63,9 @@ fastq_rev=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $3}'
 #seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_rev##*/}
 seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/$fastq_fwd
 seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/$fastq_rev
+
+# print info on the files it ran on to the slurm output
+echo "filtered the fastq files: $fastq_fwd and $fastq_rev"
+
 
 
