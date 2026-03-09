@@ -8,11 +8,15 @@
 #SBATCH --partition=defq
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=10
-#SBATCH --mem=100g
+#SBATCH --cpus-per-task=40
+#SBATCH --mem=200g
 #SBATCH --time=8:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=46-115
+
+### two pairs failed with OOM at 100G so ran them separately with 200G these were samples SRR7107615 and SRR7107632
+### --array=1-115
+### --cpus-per-task=10
+### --mem=100g
 
 ###  # testing on a single individual
 ###  # this used 85GB of memory!!
@@ -52,17 +56,17 @@ PAIRS_NEEDED=$(echo "$GENOME_SIZE * $COVERAGE / (2 * $READ_LEN)" | bc)
 
 
 # set the paired file names
-#fastq_fwd=/share/BioinfMSc/Hannah_resources/doggies/fastqs/SRR7120208_1.fastq.gz
-#fastq_rev=/share/BioinfMSc/Hannah_resources/doggies/fastqs/SRR7120208_2.fastq.gz
-fastq_fwd=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $2}' $CONFIG)
-fastq_rev=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $3}' $CONFIG)
+fastq_fwd=/share/BioinfMSc/Hannah_resources/doggies/fastqs/SRR7107632_1.fastq.gz
+fastq_rev=/share/BioinfMSc/Hannah_resources/doggies/fastqs/SRR7107632_2.fastq.gz
+#fastq_fwd=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $2}' $CONFIG)
+#fastq_rev=$(awk -v ArrayTaskID=$SLURM_ARRAY_TASK_ID '$1==ArrayTaskID {print $3}' $CONFIG)
 
 
 # subsample the forward and reverse reads to retain only the number of pairs we specified
-#seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_fwd##*/}
-#seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_rev##*/}
-seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/$fastq_fwd
-seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/$fastq_rev
+seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_fwd##*/}
+seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/${fastq_rev##*/}
+#seqtk sample -s100 $fastq_fwd $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/$fastq_fwd
+#seqtk sample -s100 $fastq_rev $PAIRS_NEEDED | gzip > /gpfs01/home/mbzlld/data/dogs/filtered_fastqs/$fastq_rev
 
 # print info on the files it ran on to the slurm output
 echo "filtered the fastq files: $fastq_fwd and $fastq_rev"
