@@ -5,7 +5,7 @@
 #SBATCH --ntasks=4
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=40g
-#SBATCH --time=80:00:00
+#SBATCH --time=168:00:00
 #SBATCH --job-name=rclone_student_data
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
 
