@@ -91,7 +91,7 @@ cut -f1-12 -d$'\t' run_info_flt.tsv > metadata_reads.tsv
 # from my laptop pull the metadata
 scp ada:/share/BioinfMSc/temp/doggies/metadata_reads.tsv ./
 
-
+scp ada:/gpfs01/home/mbzlld/data/dogs/metadata_reads.tsv ./
 
 
 
