@@ -13,7 +13,8 @@
 #SBATCH --mem=250g
 #SBATCH --time=8:00:00
 #SBATCH --output=/gpfs01/home/mbzlld/code_and_scripts/slurm_out_scripts/slurm-%x-%j.out
-#SBATCH --array=80,87,108,110,112
+#SBATCH --array=14,96,93
+#--array=80,87,108,110,112
 #14,96,93
 
 ##  # make the array config file
