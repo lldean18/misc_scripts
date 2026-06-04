@@ -16,10 +16,19 @@ module load rclone-uon/1.65.2
 
 # copy the directory with rclone
 rclone --transfers 4 --checkers 4 --bwlimit 100M --onedrive-chunk-size 5M \
---checksum copy /gpfs01/home/mbzlld/data/heap_data Laura:HPC_data_dirs_backup/heap_data
+--checksum copy /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 
 # Check the directory has copied successfully
-rclone check --one-way /gpfs01/home/mbzlld/data/heap_data Laura:HPC_data_dirs_backup/heap_data
+rclone check --one-way /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 
 # unload module
 module unload rclone-uon/1.65.2
+
+
+
+# SUCCESSFUL LONGTERM DATA BACKUPS
+# /gpfs01/home/mbzlld/data/heap_data Laura:HPC_data_dirs_backup/heap_data
+# ~/data/heap_data about 3GB
+
+# ~/data/bryant = 58GB
+
