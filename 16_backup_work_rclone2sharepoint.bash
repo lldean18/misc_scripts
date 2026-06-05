@@ -3,19 +3,19 @@
 
 # script to backup finished with data directories from Ada to sharepoint with rclone
 
-#SBATCH --time=24:00:00
+#SBATCH --time=166:00:00
 #SBATCH --job-name=rclone
 #SBATCH --partition=defq
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
-#SBATCH --mem=16g
+#SBATCH --mem=8g
 
 
 # setup env
 module load rclone-uon/1.65.2
 
 # copy the directory with rclone
-rclone --transfers 4 --checkers 4 --bwlimit 100M --onedrive-chunk-size 5M --copy-links \
+rclone --transfers 4 --checkers 4 --bwlimit 200M --onedrive-chunk-size 50M --copy-links \
 --checksum copy /gpfs01/home/mbzlld/data/splice_variant_search Laura2:HPC_data_dirs_backup/splice_variant_search
 
 # Check the directory has copied successfully
@@ -36,4 +36,11 @@ module unload rclone-uon/1.65.2
 
 
 
+
 # ~/data/splice_variant_search 2.5TB
+
+
+
+
+
+
