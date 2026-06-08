@@ -13,10 +13,12 @@
 module load rclone-uon/1.65.2
 
 # copy a directory called cats from the HPC to MySite
-rclone --transfers 4 --checkers 4 --bwlimit 100M --checksum copy /share/BioinfMSc/life4136_2526 OrgOne:BioinfMSc2526/life4136_2526
+rclone --transfers 4 --checkers 4 --bwlimit 100M --checksum copy /share/BioinfMSc/Matt_resources OrgOne:BioinfMSc2526/Matt_resources
+#rclone --transfers 4 --checkers 4 --bwlimit 100M --checksum copy /share/BioinfMSc/life4136_2526 OrgOne:BioinfMSc2526/life4136_2526
 
 # Check the directory has copied successfully
-rclone check --one-way /share/BioinfMSc/life4136_2526 OrgOne:BioinfMSc2526/life4136_2526
+rclone check --one-way /share/BioinfMSc/Matt_resources OrgOne:BioinfMSc2526/Matt_resources
+#rclone check --one-way /share/BioinfMSc/life4136_2526 OrgOne:BioinfMSc2526/life4136_2526
 
 # unload the software
 module unload rclone-uon/1.65.2
