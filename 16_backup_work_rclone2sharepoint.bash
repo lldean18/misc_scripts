@@ -9,7 +9,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
 #SBATCH --mem=8g
-
+#SBATCH --output=slurm-%x-%j.out
 
 # setup env
 module load rclone-uon/1.65.2
