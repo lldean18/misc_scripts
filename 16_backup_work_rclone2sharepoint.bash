@@ -16,10 +16,10 @@ module load rclone-uon/1.65.2
 
 # copy the directory with rclone
 rclone --transfers 4 --checkers 4 --bwlimit 200M --onedrive-chunk-size 50M --copy-links \
---checksum copy /gpfs01/home/mbzlld/data/hagfish Laura2:HPC_data_dirs_backup/hagfish
+--checksum copy /gpfs01/home/mbzlld/data/Hoverflies Laura2:HPC_data_dirs_backup/Hoverflies
 
 # Check the directory has copied successfully
-rclone check --one-way /gpfs01/home/mbzlld/data/hagfish Laura2:HPC_data_dirs_backup/hagfish
+rclone check --one-way /gpfs01/home/mbzlld/data/Hoverflies Laura2:HPC_data_dirs_backup/Hoverflies
 
 # unload module
 module unload rclone-uon/1.65.2
@@ -46,8 +46,16 @@ module unload rclone-uon/1.65.2
 
 # /gpfs01/home/mbzlld/data/hagfish Laura2:HPC_data_dirs_backup/hagfish
 # ~/data/hagfish 2.1TB
+# COMPLETED 
+
+# /gpfs01/home/mbzlld/data/Hoverflies Laura2:HPC_data_dirs_backup/Hoverflies
+# ~/Hoverflies 2.6TB
 # RUNNING
 
-# ~/Hoverflies 2.6TB
+
+
+# ~/danionella 2.9TB
+
+
 
 
