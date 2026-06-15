@@ -16,10 +16,10 @@ module load rclone-uon/1.65.2
 
 # copy the directory with rclone
 rclone --transfers 4 --checkers 4 --bwlimit 200M --onedrive-chunk-size 50M --copy-links \
---checksum copy /gpfs01/home/mbzlld/data/danionella Laura2:HPC_data_dirs_backup/danionella
+--checksum copy /gpfs01/home/mbzlld/data/tradis Laura2:HPC_data_dirs_backup/tradis
 
 # Check the directory has copied successfully
-rclone check --one-way /gpfs01/home/mbzlld/data/danionella Laura2:HPC_data_dirs_backup/danionella
+rclone check --one-way /gpfs01/home/mbzlld/data/tradis Laura2:HPC_data_dirs_backup/tradis
 
 # unload module
 module unload rclone-uon/1.65.2
@@ -32,31 +32,33 @@ module unload rclone-uon/1.65.2
 
 # /gpfs01/home/mbzlld/data/heap_data Laura:HPC_data_dirs_backup/heap_data
 # ~/data/heap_data about 3GB
-# COMPLETED
+# COMPLETED June 2026
 
 # /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 # ~/data/bryant = 58GB
-# COMPLETED
+# COMPLETED June 2026
 
 ### LAURA2 ###
 
 # /gpfs01/home/mbzlld/data/splice_variant_search Laura2:HPC_data_dirs_backup/splice_variant_search
 # ~/data/splice_variant_search 2.5TB
-# COMPLTETED
+# COMPLTETED June 2026
 
 # /gpfs01/home/mbzlld/data/hagfish Laura2:HPC_data_dirs_backup/hagfish
 # ~/data/hagfish 2.1TB
-# COMPLETED 
+# COMPLETED 11th June 2026
 
 # /gpfs01/home/mbzlld/data/Hoverflies Laura2:HPC_data_dirs_backup/Hoverflies
 # ~/Hoverflies 2.6TB
-# COMPLETED
+# COMPLETED 12th June 2026
 
 # /gpfs01/home/mbzlld/data/danionella Laura2:HPC_data_dirs_backup/danionella
 # ~/danionella 2.9TB
-# COMPLETED
+# COMPLETED 15th June 2026
 
-
+# /gpfs01/home/mbzlld/data/tradis Laura2:HPC_data_dirs_backup/tradis
+# ~/data/tradis 59GB
+# running
 
 
 
