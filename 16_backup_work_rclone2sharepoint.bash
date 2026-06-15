@@ -46,7 +46,7 @@ module unload rclone-uon/1.65.2
 
 # /gpfs01/home/mbzlld/data/hagfish Laura2:HPC_data_dirs_backup/hagfish
 # ~/data/hagfish 2.1TB
-# COMPLETED 11th June 2026
+# COMPLETED June 2026
 
 # /gpfs01/home/mbzlld/data/Hoverflies Laura2:HPC_data_dirs_backup/Hoverflies
 # ~/Hoverflies 2.6TB
@@ -58,7 +58,7 @@ module unload rclone-uon/1.65.2
 
 # /gpfs01/home/mbzlld/data/tradis Laura2:HPC_data_dirs_backup/tradis
 # ~/data/tradis 59GB
-# running
+# COMPLETED 15th June 2026 but without any of the fastqc or multiqc html files
 
 
 
