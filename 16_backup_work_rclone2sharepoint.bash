@@ -54,7 +54,10 @@ module unload rclone-uon/1.65.2
 
 # /gpfs01/home/mbzlld/data/danionella Laura2:HPC_data_dirs_backup/danionella
 # ~/danionella 2.9TB
-# RUNNING
+# COMPLETED
+
+
+
 
 
 
