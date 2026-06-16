@@ -28,9 +28,9 @@ module unload rclone-uon/1.65.2
 # Bill_resources
 # Matt_resources 149 GB
 # life4141 146 GB
+# Hannah_resources 1.4TB
 
 
 # still waiting to do
-# Hannah_resources 1.4TB
 # then finally their huge working dir life4136_2526 which is likely too big
 
