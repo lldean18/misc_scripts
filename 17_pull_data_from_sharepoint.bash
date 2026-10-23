@@ -17,10 +17,10 @@ module load rclone-uon/1.65.2
 
 # copy the directory with rclone
 rclone --transfers 4 --checkers 4 --bwlimit 200M --onedrive-chunk-size 50M --copy-links \
---checksum copy MacCollLab1:Laura_Dean/HPC_data_backup/qtl/trimmed_fastqs /gpfs01/home/mbzlld/data/stickleback/
+--checksum copy MacCollLab1:Laura_Dean/HPC_data_backup/qtl/trimmed_fqs /gpfs01/home/mbzlld/data/stickleback/
 
 # Check the directory has copied successfully
-rclone check --one-way MacCollLab1:Laura_Dean/HPC_data_backup/qtl/trimmed_fastqs /gpfs01/home/mbzlld/data/stickleback/
+rclone check --one-way MacCollLab1:Laura_Dean/HPC_data_backup/qtl/trimmed_fqs /gpfs01/home/mbzlld/data/stickleback/
 
 # unload module
 module unload rclone-uon/1.65.2
