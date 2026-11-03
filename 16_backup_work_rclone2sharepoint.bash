@@ -16,10 +16,10 @@ module load rclone-uon/1.65.2
 
 # copy the directory with rclone
 rclone --transfers 4 --checkers 4 --bwlimit 200M --onedrive-chunk-size 50M --copy-links \
---checksum copy /gpfs01/home/mbzlld/data/tradis Laura2:HPC_data_dirs_backup/tradis
+--checksum copy /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 
 # Check the directory has copied successfully
-rclone check --one-way /gpfs01/home/mbzlld/data/tradis Laura2:HPC_data_dirs_backup/tradis
+rclone check --one-way /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 
 # unload module
 module unload rclone-uon/1.65.2
@@ -37,6 +37,7 @@ module unload rclone-uon/1.65.2
 # /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 # ~/data/bryant = 58GB
 # COMPLETED June 2026
+# updated 3rd Nov 2026 
 
 ### LAURA2 ###
 
