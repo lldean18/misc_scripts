@@ -37,7 +37,7 @@ module unload rclone-uon/1.65.2
 # /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
 # ~/data/bryant = 58GB
 # COMPLETED June 2026
-# updated 3rd Nov 2026 
+# updated 3rd Nov 2026 224G not completed yet but running 
 
 ### LAURA2 ###
 
