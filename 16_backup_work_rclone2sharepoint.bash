@@ -3,7 +3,7 @@
 
 # script to backup finished with data directories from Ada to sharepoint with rclone
 
-#SBATCH --time=166:00:00
+#SBATCH --time=115:00:00
 #SBATCH --job-name=rclone
 #SBATCH --partition=defq
 #SBATCH --nodes=1
@@ -11,15 +11,25 @@
 #SBATCH --mem=8g
 #SBATCH --output=slurm-%x-%j.out
 
+# Possible sharepoint sites
+# Laura                onedrive
+# Laura2               onedrive
+# MacCollLab1          onedrive
+# MacCollLab2          onedrive
+# OrgOne               onedrive
+# OrgOne2              onedrive
+# ctenella             onedrive
+# BioinfMSc            onedrive
+
 # setup env
 module load rclone-uon/1.65.2
 
 # copy the directory with rclone
 rclone --transfers 4 --checkers 4 --bwlimit 200M --onedrive-chunk-size 50M --copy-links \
---checksum copy /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
+--checksum copy /share/BioinfMSc BioinfMSc_2526:BioinfMSc
 
 # Check the directory has copied successfully
-rclone check --one-way /gpfs01/home/mbzlld/data/bryant Laura:HPC_data_dirs_backup/bryant
+rclone check --one-way /share/BioinfMSc BioinfMSc_2526:BioinfMSc
 
 # unload module
 module unload rclone-uon/1.65.2
